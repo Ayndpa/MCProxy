@@ -2,6 +2,7 @@
   "name": "mc-proxy",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "MC Proxy：Cloudflare Workers 上的 Fabric / Minecraft Maven 与 CDN 加速代理",
   "type": "module",
   "engines": {
