@@ -226,7 +226,7 @@ ${rows}
      <code>https://maven.fabricmc.net/</code> 换成 <code>${escapeHtml(origin)}/fabric-maven/</code>：</p>
   <pre>repositories {
     maven {
-        name = "FabricProxy"
+        name = "MCProxy"
         url = uri("${escapeHtml(origin)}/fabric-maven/")
     }
 }</pre>

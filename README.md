@@ -1,8 +1,8 @@
-# Fabric 加速代理（Cloudflare Workers）
+# MC Proxy（Cloudflare Workers）
 
 把 Fabric 相关域名代理到 Cloudflare 全球边缘节点。国内客户端从就近的 Cloudflare 节点拉取，避开上游直连的跨境拥塞，用来加速 fabric-loader / fabric-api / intermediary 等 Maven 依赖的下载。
 
-和同目录的 `McSpeed`（优选 Cloudflare IP 写 hosts）配合使用：McSpeed 负责给域名挑最优 IP，本 Worker 负责在那条线路上提供正确的 HTTP 代理。
+和同目录的 `MCSpeed`（优选 Cloudflare IP 写 hosts）配合使用：MC Speed 负责给域名挑最优 IP，本 Worker 负责在那条线路上提供正确的 HTTP 代理。
 
 **当前只开放 Fabric 生态三条路由**，其余路由的定义保留在 `src/routes.js` 中但暂停服务，请求返回 404。需要时把对应条目的 `enabled` 改成 `true` 即可恢复。
 
@@ -15,7 +15,7 @@
 ## 快速开始
 
 ```powershell
-cd FabricProxy
+cd MCProxy
 npm install
 npm run dev          # 本地 http://localhost:8787
 ```
@@ -24,7 +24,7 @@ npm run dev          # 本地 http://localhost:8787
 
 ```powershell
 npx wrangler login
-npm run deploy       # 得到 https://fabric-mc-proxy.<你的子域>.workers.dev
+npm run deploy       # 得到 https://mc-proxy.<你的子域>.workers.dev
 ```
 
 查看实时日志：`npm run tail`
@@ -58,7 +58,7 @@ Modrinth（cdn / api / 官网）、Paper（`/paper-fill/`、`/paper-api/`）、M
 ```kotlin
 repositories {
     maven {
-        name = "FabricProxy"
+        name = "MCProxy"
         url = uri("https://你的域名/fabric-maven/")
     }
 }
@@ -139,12 +139,12 @@ npx wrangler secret put PROXY_TOKEN
 { "ok": true, "colo": "HKG", "time": "2026-10-22T06:33:54.000Z" }
 ```
 
-可以配合 McSpeed 对多个 Worker 域名（或优选 IP 后的地址）做测速，挑最快的用。
+可以配合 MC Speed 对多个 Worker 域名（或优选 IP 后的地址）做测速，挑最快的用。
 
 ## 项目结构
 
 ```
-FabricProxy/
+MCProxy/
   src/
     index.js     Worker 入口：鉴权、路由匹配、缓存、上游请求
     routes.js    内置路由表（含 enabled 开关）+ 首页 HTML
