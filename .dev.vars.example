@@ -1,0 +1,4 @@
+# 复制为 .dev.vars 后修改，wrangler dev 会自动读取
+PROXY_TOKEN=
+ADMIN_TOKEN=
+EXTRA_ROUTES=

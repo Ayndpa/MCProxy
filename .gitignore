@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+.dev.vars
+dist/
+*.log
+.DS_Store
+
+# McSpeed 本地联调产物：Caddyfile、证书、caddy 二进制、访问日志均由 McSpeed 自动生成
+local/
+
+# wrangler 构建输出检查目录
+dist-check/

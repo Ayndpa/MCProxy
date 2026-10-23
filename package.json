@@ -1,0 +1,22 @@
+{
+  "name": "fabric-mc-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Workers 上的 Fabric / Minecraft Maven 与 CDN 加速代理",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "workerd@1.20261019.1": true
+  }
+}

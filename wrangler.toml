@@ -1,0 +1,34 @@
+name = "fabric-mc-proxy"
+main = "src/index.js"
+compatibility_date = "2025-08-01"
+
+# 绑定自定义域（需该域名已托管在本账户下）
+routes = [
+  { pattern = "mcproxy.unmod.online", custom_domain = true }
+]
+
+[observability]
+enabled = true
+
+[vars]
+# 访问令牌。留空表示完全开放；设置后需要 ?token= 或 x-proxy-token 请求头。
+# 建议公网部署时设置，避免被当成开放代理滥用。
+PROXY_TOKEN = ""
+
+# 管理令牌，用于 POST /_routes 注册自定义路由。
+# 留空时该接口的写操作一律拒绝（403），这是有意的：
+# 否则任何人都能注册任意上游，等于把 Worker 开成开放代理。
+# 用 npx wrangler secret put ADMIN_TOKEN 设置，不要写在这里。
+ADMIN_TOKEN = ""
+
+# 额外路由，JSON 数组，例如：
+# EXTRA_ROUTES = '[{"prefix":"/my-maven","upstream":"https://example.com/maven","cache":"immutable","description":"自建仓库"}]'
+# cache 可选值：immutable / short / none
+# 注意：通过这里注册的路由一律视为启用，与 src/routes.js 里 enabled: false 的暂停策略无关。
+EXTRA_ROUTES = ""
+
+# 动态路由持久化（可选）。绑定后 POST /_routes 的路由会全边缘持久保存。
+# 创建命令：npx wrangler kv namespace create PROXY_ROUTES
+# [[kv_namespaces]]
+# binding = "PROXY_ROUTES"
+# id = "填入创建后返回的 id"
